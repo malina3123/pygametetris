@@ -2,6 +2,7 @@ import sys
 import pygame
 from game import Game
 from colors import Colors
+from button import Button
 
 # pygame инициализация
 pygame.init()
@@ -32,55 +33,66 @@ pygame.time.set_timer(GAME_UPDATE, 100)
 pause = True
 difficulty = 0
 
+button=Button(50,100,300,150,"button")
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == pygame.KEYDOWN:
-            pause = False
-            if game.game_over:
-                game.game_over = False
-                game.reset()
-                pause = True
-            if event.key == pygame.K_LEFT and not game.game_over and not pause:
-                game.move_left()
-            if event.key == pygame.K_RIGHT and not game.game_over and not pause:
-                game.move_right()
-            if event.key == pygame.K_DOWN and not game.game_over and not pause:
-                game.move_down()
-            if event.key == pygame.K_UP and not game.game_over and not pause:
-                game.rotate()
-            if event.key == pygame.K_SPACE:
-                game.reset()
-
-
-        if event.type == GAME_UPDATE and not game.game_over and not pause:
-            game.move_down()
-            if difficulty < 125:
-                difficulty += 0.1
-                pygame.time.set_timer(GAME_UPDATE, 200-round(difficulty))
-
-    screen.fill(Colors.dark_orange)
-    score_value_surface = title_font.render(str(game.score), True, Colors.white)
-    screen.blit(score_surface, (365, 15, 50, 50))
-    pygame.draw.rect(screen, Colors.black, score_rect, 0, 10)
-    pygame.draw.rect(screen, Colors.gold, score_rect, 5, 10)
-    screen.blit(score_value_surface, score_value_surface.get_rect(centerx=score_rect.centerx,
-                                                                  centery=score_rect.centery))
-
-    pygame.draw.rect(screen, Colors.black, record_rect, 0, 10)
-    pygame.draw.rect(screen, Colors.gold, record_rect, 5, 10)
-    game.records.print_records(screen, records_font)
-
-    screen.blit(next_surface, (375, 315, 50, 50))
-    pygame.draw.rect(screen, Colors.black, next_rect, 0, 10)
-    pygame.draw.rect(screen, Colors.gold, next_rect, 5, 10)
-
-    game.draw_blocks(screen)
-
-    if game.game_over:
-        screen.blit(game_over_surface, (320, 550, 50, 50))
-
+    button.button_pressed(screen)
     pygame.display.update()
-    clock.tick(60)
+    clock.tick()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                pause = False
+                if game.game_over:
+                    game.game_over = False
+                    game.reset()
+                    pause = True
+                if event.key == pygame.K_LEFT and not game.game_over and not pause:
+                    game.move_left()
+                if event.key == pygame.K_RIGHT and not game.game_over and not pause:
+                    game.move_right()
+                if event.key == pygame.K_DOWN and not game.game_over and not pause:
+                    game.move_down()
+                if event.key == pygame.K_UP and not game.game_over and not pause:
+                    game.rotate()
+                if event.key == pygame.K_SPACE:
+                    game.reset()
+
+
+            if event.type == GAME_UPDATE and not game.game_over and not pause:
+                game.move_down()
+                if difficulty < 125:
+                    difficulty += 0.1
+                    pygame.time.set_timer(GAME_UPDATE, 200-round(difficulty))
+
+        screen.fill(Colors.dark_orange)
+        score_value_surface = title_font.render(str(game.score), True, Colors.white)
+        screen.blit(score_surface, (365, 15, 50, 50))
+        pygame.draw.rect(screen, Colors.black, score_rect, 0, 10)
+        pygame.draw.rect(screen, Colors.gold, score_rect, 5, 10)
+        screen.blit(score_value_surface, score_value_surface.get_rect(centerx=score_rect.centerx,
+                                                                      centery=score_rect.centery))
+
+        pygame.draw.rect(screen, Colors.black, record_rect, 0, 10)
+        pygame.draw.rect(screen, Colors.gold, record_rect, 5, 10)
+        game.records.print_records(screen, records_font)
+
+        screen.blit(next_surface, (375, 315, 50, 50))
+        pygame.draw.rect(screen, Colors.black, next_rect, 0, 10)
+        pygame.draw.rect(screen, Colors.gold, next_rect, 5, 10)
+
+        game.draw_blocks(screen)
+
+        if game.game_over:
+            screen.blit(game_over_surface, (320, 550, 50, 50))
+
+        pygame.display.update()
+        clock.tick(60)
