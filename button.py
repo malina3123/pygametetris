@@ -11,14 +11,14 @@ class Button:
         self.alreadyPressed = False
         self.buttonText = button_text
 
-        self.inactive = Colors.silver
-        self.active = Colors.grey
-        self.pressed = Colors.white
+        self.inactive = Colors.black
+        self.active = Colors.black
+        self.pressed = Colors.black
 
         self.font = pygame.font.Font(None, 40)
         self.button_rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-        self.button_text = self.font.render(self.buttonText, True, Colors.black)
+        self.button_text = self.font.render(self.buttonText, True, Colors.white)
         self.next_page = False
         self.pressed = False
 

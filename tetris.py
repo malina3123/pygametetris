@@ -33,8 +33,8 @@ pygame.time.set_timer(GAME_UPDATE, 100)
 pause = True
 difficulty = 0
 
-button=Button(50,100,300,150,"Начать игру")
-escbutton=Button(50,300,300,150,"Выход из игры")
+button=Button(100,100,300,150,"Начать игру")
+escbutton=Button(100,300,300,150,"Выход из игры")
 
 while True:
     for event in pygame.event.get():
