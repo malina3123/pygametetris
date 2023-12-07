@@ -40,6 +40,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
     button.button_pressed(screen)
     pygame.display.update()
     clock.tick()
