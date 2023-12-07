@@ -23,6 +23,7 @@ class Button:
         self.pressed = False
 
 
+
     def button_pressed(self, screen):
         mouse_pos = pygame.mouse.get_pos()
         pygame.draw.rect(screen, self.inactive, self.button_rect, 0, 10)

@@ -27,6 +27,7 @@ clock = pygame.time.Clock()
 # вызов основного класса Game
 game = Game()
 
+
 GAME_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(GAME_UPDATE, 100)
 
