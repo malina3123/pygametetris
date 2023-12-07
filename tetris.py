@@ -33,7 +33,7 @@ pygame.time.set_timer(GAME_UPDATE, 100)
 pause = True
 difficulty = 0
 
-button=Button(50,100,300,150,"button")
+button=Button(50,100,300,150,"Начать игру")
 
 while True:
     for event in pygame.event.get():
@@ -44,7 +44,7 @@ while True:
     pygame.display.update()
     clock.tick()
 
-    while True:
+    while button.next_page:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
