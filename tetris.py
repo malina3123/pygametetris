@@ -34,6 +34,7 @@ pause = True
 difficulty = 0
 
 button=Button(50,100,300,150,"Начать игру")
+escbutton=Button(50,300,300,150,"Выход из игры")
 
 while True:
     for event in pygame.event.get():
@@ -42,6 +43,12 @@ while True:
             sys.exit()
 
     button.button_pressed(screen)
+    escbutton.button_pressed(screen)
+
+    if escbutton.next_page:
+        pygame.quit()
+        sys.exit()
+
     pygame.display.update()
     clock.tick()
 
