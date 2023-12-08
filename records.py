@@ -20,6 +20,7 @@ class Record:
                 self.numbers[i] = self.numbers[i - 1]
             self.numbers[0] = number
     #отрисовка таблицы рекордов и счёта в ней
+
     def print_records(self, screen, font):
         for i in range(len(self.numbers) - 1):
             filler_string = str(i) + ". "

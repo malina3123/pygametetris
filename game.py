@@ -64,6 +64,7 @@ class Game:
             self.game_over = True
             self.game_over_sound.play()
             self.game_over_sound.set_volume(0.01)
+
     #рестарт игры и запись прошлого рекорда в таблицу рекордов
     def reset(self):
         self.grid.reset()

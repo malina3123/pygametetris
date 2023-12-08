@@ -103,6 +103,7 @@ while True:
         pygame.draw.rect(screen, Colors.gold, record_rect, 5, 10)
         game.records.print_records(screen, records_font)
 
+
         #прошлые рекорды
         screen.blit(next_surface, (375, 315, 50, 50))
         pygame.draw.rect(screen, Colors.black, next_rect, 0, 10)

@@ -33,6 +33,7 @@ class Grid:
     def clear_row(self, row):
         for column in range(self.num_cols):
             self.grid[row][column] = 0
+
     #перемещение ряда вниз
     def move_row_down(self, row, num_rows):
         for column in range(self.num_cols):

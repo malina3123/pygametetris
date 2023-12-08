@@ -27,6 +27,7 @@ class Block:
             position = Position(position.row + self.row_offset, position.column + self.column_offset)
             moved_tiles.append(position)
         return moved_tiles
+
     #поворот блока
     def rotate(self):
         self.rotation_state += 1

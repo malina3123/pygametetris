@@ -24,6 +24,7 @@ class Button:
         self.pressed = False
 
 
+
     #активация функции кнопки
     def button_pressed(self, screen):
         mouse_pos = pygame.mouse.get_pos()
