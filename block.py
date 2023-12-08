@@ -4,6 +4,7 @@ from position import Position
 
 
 class Block:
+    #инициализация класса
     def __init__(self, id):
         self.id = id
         self.cells = {}
@@ -13,10 +14,12 @@ class Block:
         self.rotation_state = 0
         self.colors = Colors.get_cell_colors()
 
+    #движение блока
     def move(self, rows, columns):
         self.row_offset += rows
         self.column_offset += columns
 
+    #координаты блока
     def get_cell_positions(self):
         tiles = self.cells[self.rotation_state]
         moved_tiles = []
@@ -24,17 +27,17 @@ class Block:
             position = Position(position.row + self.row_offset, position.column + self.column_offset)
             moved_tiles.append(position)
         return moved_tiles
-
+    #поворот блока
     def rotate(self):
         self.rotation_state += 1
         if self.rotation_state == len(self.cells):
             self.rotation_state = 0
-
+    #отмена поворота
     def undo_rotation(self):
         self.rotation_state -= 1
         if self.rotation_state == 0:
             self.rotation_state = len(self.cells) - 1
-
+    #отрисовка блока
     def draw(self, screen, offset_x, offset_y):
         tiles = self.get_cell_positions()
         for tile in tiles:

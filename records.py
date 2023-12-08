@@ -2,6 +2,7 @@ from colors import Colors
 
 
 class Record:
+    #инициализация
     def __init__(self):
         self.numbers = [0 for i in range(7)]
         self.max = 7
@@ -9,7 +10,7 @@ class Record:
 
     def __getitem__(self, i):
         return self.numbers[i]
-
+    #добавление счёта в таблицу рекордов
     def add_record(self, number):
         if self.real_max < self.max:
             self.numbers[self.real_max] = number
@@ -18,7 +19,7 @@ class Record:
             for i in range(len(self.numbers) - 1, 0, -1):
                 self.numbers[i] = self.numbers[i - 1]
             self.numbers[0] = number
-
+    #отрисовка таблицы рекордов и счёта в ней
     def print_records(self, screen, font):
         for i in range(len(self.numbers) - 1):
             filler_string = str(i) + ". "

@@ -10,31 +10,35 @@ class Grid:
         self.grid = [[0 for i in range(self.num_cols)] for j in range(self.num_rows)]
         self.colors = Colors.get_cell_colors()
 
+    # проверка на выход за границу  поля
     def is_inside(self, row, column):
         if 0 <= row < self.num_rows and 0 <= column < self.num_cols:
             return True
         return False
 
+    # проверка ячейки на пустоту
     def is_empty(self, row, column):
         if self.grid[row][column] == 0:
             return True
         return False
 
+    #проверка заполненности ряда
     def is_row_full(self, row):
         for column in range(self.num_cols):
             if self.grid[row][column] == 0:
                 return False
         return True
 
+    # очистка ряда
     def clear_row(self, row):
         for column in range(self.num_cols):
             self.grid[row][column] = 0
-
+    #перемещение ряда вниз
     def move_row_down(self, row, num_rows):
         for column in range(self.num_cols):
             self.grid[row+num_rows][column] = self.grid[row][column]
             self.grid[row][column] = 0
-
+    #очистка рядов
     def clear_full_rows(self):
         completed = 0
         for row in range(self.num_rows - 1, 0, -1):
@@ -44,12 +48,12 @@ class Grid:
             elif completed > 0:
                 self.move_row_down(row, completed)
         return completed
-
+    #обновление игрового поля
     def reset(self):
         for row in range(self.num_rows):
             for column in range(self.num_cols):
                 self.grid[row][column] = 0
-
+    #отрисовка игрвого поля
     def draw(self, screen):
         for row in range(self.num_rows):
             for column in range(self.num_cols):

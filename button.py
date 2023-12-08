@@ -3,6 +3,7 @@ from colors import Colors
 
 
 class Button:
+    #инициализация
     def __init__(self, x, y, width, height, button_text):
         self.x = x
         self.y = y
@@ -23,7 +24,7 @@ class Button:
         self.pressed = False
 
 
-
+    #активация функции кнопки
     def button_pressed(self, screen):
         mouse_pos = pygame.mouse.get_pos()
         pygame.draw.rect(screen, self.inactive, self.button_rect, 0, 10)
@@ -36,7 +37,7 @@ class Button:
                     self.alreadyPressed = True
             else:
                 self.alreadyPressed = False
-
+        #отрисовка кнопки и её центровка
         pygame.draw.rect(screen, self.active, self.button_rect, 3, 10)
         screen.blit(self.button_text,
                     self.button_text.get_rect(centerx=self.button_rect.centerx, centery=self.button_rect.centery))

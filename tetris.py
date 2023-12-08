@@ -1,10 +1,11 @@
 import sys
 import pygame
+import time
 from game import Game
 from colors import Colors
 from button import Button
 
-# pygame инициализация
+#инициализация pygame
 pygame.init()
 
 # текстовые элементы и фигуры
@@ -17,7 +18,7 @@ score_rect = pygame.Rect(320, 45, 170, 50)
 record_rect = pygame.Rect(320, 100, 170, 210)
 next_rect = pygame.Rect(320, 345, 170, 180)
 
-# создание экрана программы
+# создание экрана игры
 screen = pygame.display.set_mode((500, 620))
 pygame.display.set_caption("Python Tetris")
 
@@ -27,16 +28,19 @@ clock = pygame.time.Clock()
 # вызов основного класса Game
 game = Game()
 
-
+#событие для рассчёта сложности
 GAME_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(GAME_UPDATE, 100)
 
+#сложность и пауза
 pause = True
 difficulty = 0
 
+#отрисовка кнопок в главном меню
 button=Button(100,100,300,150,"Начать игру")
 escbutton=Button(100,300,300,150,"Выход из игры")
 
+#игровой цикл
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -84,6 +88,9 @@ while True:
                     difficulty += 0.1
                     pygame.time.set_timer(GAME_UPDATE, 200-round(difficulty))
 
+
+
+        #заливка поля
         screen.fill(Colors.dark_orange)
         score_value_surface = title_font.render(str(game.score), True, Colors.white)
         screen.blit(score_surface, (365, 15, 50, 50))
@@ -91,17 +98,19 @@ while True:
         pygame.draw.rect(screen, Colors.gold, score_rect, 5, 10)
         screen.blit(score_value_surface, score_value_surface.get_rect(centerx=score_rect.centerx,
                                                                       centery=score_rect.centery))
-
+        #отображение текущего количества очков
         pygame.draw.rect(screen, Colors.black, record_rect, 0, 10)
         pygame.draw.rect(screen, Colors.gold, record_rect, 5, 10)
         game.records.print_records(screen, records_font)
 
+        #прошлые рекорды
         screen.blit(next_surface, (375, 315, 50, 50))
         pygame.draw.rect(screen, Colors.black, next_rect, 0, 10)
         pygame.draw.rect(screen, Colors.gold, next_rect, 5, 10)
 
         game.draw_blocks(screen)
 
+        #конец игры
         if game.game_over:
             screen.blit(game_over_surface, (320, 550, 50, 50))
 

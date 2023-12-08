@@ -6,6 +6,7 @@ from records import Record
 
 
 class Game:
+    #инициализация класса
     def __init__(self):
         self.grid = Grid()
         self.records = Record()
@@ -23,14 +24,14 @@ class Game:
         pygame.mixer.music.set_volume(0.01)
     def update_score(self, lines_cleared):
         self.score += 100 * lines_cleared
-
+    #получение случайного блока из списка
     def get_random_block(self):
         if len(self.blocks) == 0:
             self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
         block = random.choice(self.blocks)
         self.blocks.remove(block)
         return block
-
+    #3 метода для описания движения блока
     def move_left(self):
         self.current_block.move(0, -1)
         if not self.block_inside() or not self.block_fits():
@@ -46,7 +47,7 @@ class Game:
         if not self.block_inside() or not self.block_fits():
             self.current_block.move(-1, 0)
             self.lock_block()
-
+    #фиксация положения блока на поле
     def lock_block(self):
         tiles = self.current_block.get_cell_positions()
         for position in tiles:
@@ -63,7 +64,7 @@ class Game:
             self.game_over = True
             self.game_over_sound.play()
             self.game_over_sound.set_volume(0.01)
-
+    #рестарт игры и запись прошлого рекорда в таблицу рекордов
     def reset(self):
         self.grid.reset()
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
@@ -80,6 +81,7 @@ class Game:
                 return False
         return True
 
+    #поворот блока
     def rotate(self):
         self.current_block.rotate()
         if not self.block_inside() or not self.block_fits():
@@ -87,14 +89,14 @@ class Game:
         else:
             self.rotate_sound.play()
             self.rotate_sound.set_volume(0.01)
-
+    #проверка условия на выход за границу поля
     def block_inside(self):
         tiles = self.current_block.get_cell_positions()
         for tile in tiles:
             if not self.grid.is_inside(tile.row, tile.column):
                 return False
         return True
-
+    #отрисовка следующего и текущего блоков
     def draw_blocks(self, screen):
         self.grid.draw(screen)
         self.current_block.draw(screen, 11, 11)
